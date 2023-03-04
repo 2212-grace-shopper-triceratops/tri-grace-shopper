@@ -2,7 +2,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
 import store from '../store';
-import { Homepage, AllProducts, SingleProduct, NavBar } from './index';
+import { Homepage, AllProducts, SingleProduct, NavBar, Cart } from './index';
 
 export default function Main() {
   return (
@@ -14,6 +14,7 @@ export default function Main() {
             <Route path="/" element={<Homepage />} />
             <Route path="/products" element={<AllProducts />} />
             <Route path="/products/:productId" element={<SingleProduct />} />
+            <Route path="/cart" element={<Cart />} />
           </Routes>
         </Provider>
       </div>
