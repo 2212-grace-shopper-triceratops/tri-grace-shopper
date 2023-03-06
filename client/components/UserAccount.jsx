@@ -8,32 +8,33 @@ import {
   selectAuth,
   resetStatus,
 } from '../slices/users/authSlice';
-// import {
-//   fetchSingleUser,
-//   selectUsers,
-//   resetStatus,
-// } from '../slices/users/userSlice';
+import {
+  fetchSingleUser,
+  selectUsers,
+  resetStatus as resetUserStatus,
+} from '../slices/users/userSlice';
 
 const UserAccount = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const { auth, status } = useSelector(selectAuth);
-  // const { user } = useSelector(selectUsers);
-  // const id = auth.id;
-  // const token = localStorage.getItem('token');
+
+  const id = auth.id;
+  const token = localStorage.getItem('token');
 
   useEffect(() => {
     dispatch(attemptTokenLogin());
 
     return () => {
       dispatch(resetStatus());
+      dispatch(resetUserStatus());
     };
   }, []);
 
-  // useEffect(() => {
-  //   dispatch(fetchSingleUser({ id, token }));
-  // }, [auth]);
+  useEffect(() => {
+    dispatch(fetchSingleUser({ id, token }));
+  }, [auth]);
 
   const editProfile = async () => {
     navigate('/account/editprofile');
@@ -92,7 +93,7 @@ const UserAccount = () => {
           </button>
           <button
             onClick={attemptLogOut}
-            className="text-primary-deep-green hover:text-primary-promo-banner pb-16 text-sm"
+            className="text-primary-deep-green hover:text-primary-promo-banner text-sm"
           >
             Log Out
           </button>
