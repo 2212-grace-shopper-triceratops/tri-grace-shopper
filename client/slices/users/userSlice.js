@@ -18,19 +18,6 @@ export const fetchSingleUser = createAsyncThunk(
   }
 );
 
-// export const updateSingleUser = createAsyncThunk(
-//   'updateSingleUser',
-//   async ({ id, updates }, { rejectWithValue }) => {
-//     try {
-//       let { data } = await axios.put(`/api/users/${id}`, updates);
-//       return data;
-//     } catch (err) {
-//       console.log('axios error updating single user');
-//       return rejectWithValue(err);
-//     }
-//   }
-// );
-
 export const updateSingleUser = createAsyncThunk(
   'updateSingleUser',
   async ({ id, updates, token }, { rejectWithValue }) => {
@@ -53,6 +40,8 @@ const userSlice = createSlice({
   initialState: {
     users: [],
     user: {},
+    addresses: [],
+    payments: [],
     error: '',
     status: '',
   },
@@ -66,6 +55,8 @@ const userSlice = createSlice({
     builder
       .addCase(fetchSingleUser.fulfilled, (state, { payload }) => {
         state.user = payload;
+        state.addresses = payload.shippings;
+        state.payments = payload.payments;
         state.status = 'success';
         state.error = '';
       })
@@ -81,6 +72,8 @@ const userSlice = createSlice({
         state.user = payload;
         state.status = 'success';
         state.error = '';
+        state.addresses = payload.shippings;
+        state.payments = payload.payments;
       })
       .addCase(updateSingleUser.pending, (state, { payload }) => {
         state.status = 'loading';
