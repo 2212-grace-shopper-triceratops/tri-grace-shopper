@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+
 import {
   logOut,
   attemptTokenLogin,
@@ -38,6 +39,10 @@ const UserAccount = () => {
     navigate('/account/editprofile');
   };
 
+  const wishlist = async () => {
+    navigate('/account/wishlist');
+  };
+
   const orderHistory = () => {
     navigate('/account/orderhistory');
   };
@@ -48,7 +53,7 @@ const UserAccount = () => {
 
   const attemptLogOut = async () => {
     await dispatch(logOut());
-    navigate('/');
+    navigate('/login');
   };
 
   if (status !== 'success') return <h1>Page Loading...</h1>;
@@ -72,6 +77,12 @@ const UserAccount = () => {
             className="py-3 px-5 mr-2 mb-2 text-text-primary-deep-green-900 bg-white rounded-lg border hover:bg-gray-100"
           >
             Update Password
+          </button>
+          <button
+            onClick={wishlist}
+            className="py-3 px-5 mr-2 mb-2 text-text-primary-deep-green-900 bg-white rounded-lg border hover:bg-gray-100"
+          >
+            Wishlist
           </button>
           <button
             onClick={orderHistory}
