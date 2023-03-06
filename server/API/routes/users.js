@@ -1,9 +1,14 @@
 const router = require('express').Router();
 const chalk = require('chalk');
 const { requireToken, isAdmin } = require('../authMiddleware');
-const { User, Product, Cart, Wishlist } = require('../../DB');
-
-// router.use('/:id/wishlist', require('./wishlist'));
+const {
+  User,
+  Product,
+  Cart,
+  Wishlist,
+  Shipping,
+  Payment,
+} = require('../../DB');
 
 router.get('/', requireToken, isAdmin, async (req, res, next) => {
   // fetch all users info (ADMIN ONLY)
@@ -52,7 +57,7 @@ router.get('/:userId', requireToken, async (req, res, next) => {
     // if user is not admin & they're attempting to pull someone else's data, fail w/403
     if (req.user.id === +userId || req.user.isAdmin) {
       const user = await User.findByPk(+userId, {
-        include: [Product],
+        include: [Product, Shipping, Payment],
         attributes: { exclude: ['password'] },
       });
       res.status(200).send(user);
