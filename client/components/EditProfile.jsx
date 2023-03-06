@@ -15,13 +15,15 @@ const EditProfile = () => {
   const { auth } = useSelector(selectAuth);
 
   const { user } = useSelector(selectUsers);
+  console.log(auth.currencyId);
+
   const id = auth.id;
   const token = localStorage.getItem('token');
 
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
-  // const [password, setPassword] = useState('');
+  const [currencyId, setCurrencyId] = useState('');
   // const [shipping, setShipping] = useState('');
   // const [payment, setPayment] = useState('');
   // const [currency, setCurrency] = useState('');
@@ -38,6 +40,7 @@ const EditProfile = () => {
     setFirstName(auth.firstName || '');
     setLastName(auth.lastName || '');
     setEmail(auth.email || '');
+    setCurrencyId(auth.currencyId || '');
   }, [auth]);
 
   const updateUser = (evt) => {
@@ -109,6 +112,23 @@ const EditProfile = () => {
                   />
                 </div>
               </div>
+              {/* <div className="flex flex-wrap -mx-3 mb-6">
+                <div className="w-full px-3">
+                  <label
+                    className="block uppercase tracking-wide text-primary-deep-green text-xs font-bold mb-2"
+                    htmlFor="grid-currency"
+                  >
+                    Default Currency
+                  </label>
+                  <input
+                    className="appearance-none block w-full bg-white-200 text-gray-700 border border-gray-200 rounded py-3 px-4  leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                    id="grid-currency"
+                    type="text"
+                    value={currencyId}
+                    onChange={(evt) => setCurrencyId(evt.target.value)}
+                  />
+                </div>
+              </div> */}
               {/* <div className="flex flex-wrap -mx-3 mb-6">
                 <div className="w-full px-3">
                   <label
