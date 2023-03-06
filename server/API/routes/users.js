@@ -119,6 +119,7 @@ router.put('/:userId', requireToken, async (req, res, next) => {
         attributes: {
           exclude: ['password'],
         },
+        include: [Shipping, Payment],
       })
     );
   } catch (err) {
