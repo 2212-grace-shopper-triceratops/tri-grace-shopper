@@ -41,9 +41,9 @@
     "seed": "node seed.js",
     "seed-test": "cross-env NODE_ENV=test node seed.js",
     "start-dev": "npm run webpack & nodemon server/server.js & npx tailwindcss -i ./public/style.css -o ./public/tailwind.css --watch",
-    "start-netlify": "npm run webpack & npx tailwindcss -i ./public/style.css -o ./public/tailwind.css --watch",
+    "start-netlify": "npm run webpack & npx tailwindcss -i ./public/style.css -o ./public/tailwind.css",
     "style": "npx tailwindcss -i ./public/style.css -o ./public/tailwind.css --watch",
-    "webpack": "webpack -w ",
+    "webpack": "webpack",
     "test": "mocha"
   },
   "repository": {
