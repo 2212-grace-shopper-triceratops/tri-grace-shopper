@@ -29,6 +29,7 @@
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.8.2",
     "sequelize": "^6.29.0",
+    "serverless-http": "^3.1.1",
     "volleyball": "^1.5.1"
   },
   "name": "tri-grace-shopper",
@@ -40,6 +41,7 @@
     "seed": "node seed.js",
     "seed-test": "cross-env NODE_ENV=test node seed.js",
     "start-dev": "npm run webpack & nodemon server/server.js & npx tailwindcss -i ./public/style.css -o ./public/tailwind.css --watch",
+    "start-netlify": "npm run webpack & npx tailwindcss -i ./public/style.css -o ./public/tailwind.css --watch",
     "style": "npx tailwindcss -i ./public/style.css -o ./public/tailwind.css --watch",
     "webpack": "webpack -w ",
     "test": "mocha"

@@ -1,4 +1,5 @@
 const express = require('express');
+const serverless = require('serverless-http');
 const app = express();
 const path = require('path');
 const dotenv = require('dotenv').config();
@@ -41,4 +42,5 @@ async function init() {
 
 init();
 
-module.exports = app; // imported to mocha for tests
+module.exports.handler = serverless(app);
+// module.exports = app; // imported to mocha for tests
