@@ -154,9 +154,9 @@ const OrderHistoryDetails = () => {
                 <>
                   <p>{details[0].userName}</p>
                   <p>{addressArr[0]}</p>
-                  <p>{addressArr[2]}</p>
+                  <p>{addressArr[1]}</p>
                   <p>
-                    {addressArr[3]}, {addressArr[4]} {addressArr[5]}
+                    {addressArr[2]}, {addressArr[3]} {addressArr[4]}
                   </p>
                 </>
               )}
