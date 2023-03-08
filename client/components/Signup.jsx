@@ -97,6 +97,7 @@ export default function Signup() {
                 name="firstName"
                 onChange={(e) => {
                   setIsInvalidFirstName(false);
+                  setIsInvalid(false);
                   setFormData({ ...formData, firstName: e.target.value });
                 }}
               />
@@ -127,6 +128,7 @@ export default function Signup() {
                 name="lastName"
                 onChange={(e) => {
                   setIsInvalidLastName(false);
+                  setIsInvalid(false);
                   setFormData({ ...formData, lastName: e.target.value });
                 }}
               />
@@ -156,6 +158,7 @@ export default function Signup() {
                 name="email"
                 onChange={(e) => {
                   setIsInvalidEmail(false);
+                  setIsInvalid(false);
                   setFormData({ ...formData, email: e.target.value });
                 }}
               />
@@ -186,6 +189,7 @@ export default function Signup() {
                 name="password"
                 onChange={(e) => {
                   setIsInvalidPassword(false);
+                  setIsInvalid(false);
                   setFormData({ ...formData, password: e.target.value });
                 }}
               />
