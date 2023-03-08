@@ -25,11 +25,46 @@ export const fetchAllProducts = createAsyncThunk(
 
 export const fetchSingleProduct = createAsyncThunk(
   'products/fetchOne',
-  async (id, { rejectWithValue }) => {
+  async (productId, { rejectWithValue }) => {
     try {
-      const { data } = await axios.get(`/api/products/${id}`);
+      const { data } = await axios.get(`/api/products/${productId}`);
+      return data;
+    } catch (err) {
+      console.log('axios error getting all users');
+      return rejectWithValue(err);
+    }
+  }
+);
+
+export const editSingleProduct = createAsyncThunk(
+  'editProduct',
+  async ({ productId, updates, token }, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.put(`/api/products/${productId}`, updates, {
+        headers: {
+          authorization: token,
+        },
+      });
       return data;
     } catch (error) {
+      console.log('axios error updating single product');
+      return rejectWithValue(error);
+    }
+  }
+);
+
+export const deleteSingleProduct = createAsyncThunk(
+  'deleteProduct',
+  async ({ productId, token }, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.delete(`/api/products/${productId}`, {
+        headers: {
+          authorization: token,
+        },
+      });
+      return data;
+    } catch (error) {
+      console.log('axios error updating single product');
       return rejectWithValue(error);
     }
   }
@@ -87,11 +122,38 @@ const productSlice = createSlice({
       state.status = 'failed';
       state.error = action.error.message;
     });
-    builder.addCase(fetchSingleProduct.fulfilled, (state, action) => {
-      state.status = 'success';
-      state.error = '';
-      state.singleProduct = action.payload;
-    });
+    builder
+      .addCase(fetchSingleProduct.fulfilled, (state, action) => {
+        state.status = 'success';
+        state.error = '';
+        state.singleProduct = action.payload;
+      })
+      .addCase(editSingleProduct.fulfilled, (state, { payload }) => {
+        state.singleProduct = payload;
+        state.status = 'success';
+        state.error = '';
+      })
+      .addCase(editSingleProduct.pending, (state, { payload }) => {
+        state.status = 'loading';
+      })
+      .addCase(editSingleProduct.rejected, (state, { payload }) => {
+        state.status = 'failed';
+        console.log('failed payload', payload);
+        state.error = payload.message;
+      })
+      .addCase(deleteSingleProduct.fulfilled, (state, { payload }) => {
+        state.singleProduct = payload;
+        state.status = 'success';
+        state.error = '';
+      })
+      .addCase(deleteSingleProduct.pending, (state, { payload }) => {
+        state.status = 'loading';
+      })
+      .addCase(deleteSingleProduct.rejected, (state, { payload }) => {
+        state.status = 'failed';
+        console.log('failed payload', payload);
+        state.error = payload.message;
+      });
   },
 });
 

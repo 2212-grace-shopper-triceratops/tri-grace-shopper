@@ -64,7 +64,7 @@ const Login = () => {
                 className=" appearance-none border rounded w-96 py-3 px-4 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                 id="password"
                 type="password"
-                placeholder="   ************"
+                placeholder="************"
                 value={password}
                 onChange={(evt) => setPassword(evt.target.value)}
                 name="password"

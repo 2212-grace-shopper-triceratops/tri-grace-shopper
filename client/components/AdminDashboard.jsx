@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import {
   selectAuth,
   resetStatus as resetAuthStatus,
@@ -33,10 +34,10 @@ const AdminDashboard = () => {
   const [promoTable, setPromoTable] = useState('collapse');
 
   const inactiveButtonClass =
-    'hover:bg-green-900 hover:text-primary-bright-white p-5 rounded-r-full mr-5';
+    'hover:bg-green-900 hover:text-primary-bright-white pl-5 p-3 rounded-r-full mr-5';
 
   const activeButtonClass =
-    'bg-green-900 text-primary-bright-white p-5 rounded-r-full mr-5';
+    'bg-green-900 text-primary-bright-white pl-5 p-3 rounded-r-full mr-5';
 
   const [adminButtonStatus, setAdminButtonStatus] = useState(activeButtonClass);
   const [prodButtonStatus, setProdButtonStatus] = useState(inactiveButtonClass);
@@ -78,12 +79,12 @@ const AdminDashboard = () => {
                   setPromoButtonStatus(inactiveButtonClass);
                   setUserButtonStatus(inactiveButtonClass);
                 }}
-                className=""
+                className="text-left"
               >
                 {'ADMIN DASHBOARD'}
               </button>
             </div>
-            <div className="flex flex-col">
+            <div>
               <div className={prodButtonStatus}>
                 <button
                   onClick={() => {
@@ -96,7 +97,7 @@ const AdminDashboard = () => {
                     setUserButtonStatus(inactiveButtonClass);
                     setPromoButtonStatus(inactiveButtonClass);
                   }}
-                  className=""
+                  className="flex flex-row"
                 >
                   {'PRODUCTS'}
                 </button>
@@ -113,7 +114,7 @@ const AdminDashboard = () => {
                     setPromoButtonStatus(activeButtonClass);
                     setUserButtonStatus(inactiveButtonClass);
                   }}
-                  className=""
+                  className="text-left"
                 >
                   {'PROMOCODES'}
                 </button>
@@ -130,16 +131,19 @@ const AdminDashboard = () => {
                     setPromoButtonStatus(inactiveButtonClass);
                     setUserButtonStatus(activeButtonClass);
                   }}
-                  className=""
+                  className="text-left"
                 >
                   {'USER MANAGEMENT'}
                 </button>
               </div>
               <div className={inactiveButtonClass}>
-                <p className="">PLANTS&CO SHOPS</p>
+                <p className="text-left">PLANTS&CO SHOPS</p>
               </div>
             </div>
           </div>
+          <button className="text-left pl-5 font-bold text-sm hover:text-primary-promo-banner py-1">
+            <Link to={'/account'}>Back</Link>
+          </button>
         </aside>
 
         <div className="p-4 w-3/4  h-[calc(100vh_-_5rem)] overflow-auto">
@@ -212,6 +216,9 @@ const AdminDashboard = () => {
                       <th scope="col" className="px-6 py-3 top-0 sticky">
                         {'QTY'}
                       </th>
+                      <th scope="col" className="px-6 py-3 top-0 sticky">
+                        {'ACTIONS'}
+                      </th>
                     </tr>
                   </thead>
                   <tbody>
@@ -234,6 +241,14 @@ const AdminDashboard = () => {
                               </th>
                               <th scope="col" className="px-6 py-3">
                                 {product.qty}
+                              </th>
+                              <th scope="col" className="px-6 py-3">
+                                <Link
+                                  className="hover:text-primary-promo-banner"
+                                  to={`/account/admin/editproduct/${product.id}`}
+                                >
+                                  {'Edit / Delete'}
+                                </Link>
                               </th>
                             </tr>
                           );
@@ -294,6 +309,16 @@ const AdminDashboard = () => {
               <div id="admin" className={adminTable}>
                 <p>{`Howdy, ${auth.firstName}!`}</p>
                 <p>{"You're an admin... Nice!"}</p>
+                <div>
+                  <span>
+                    <button className="py-3 px-5 mr-2 m-5 text-center text-text-primary-deep-green-900 bg-white rounded-lg border hover:bg-gray-100">
+                      Add Product
+                    </button>
+                    <button className="py-3 px-5 mr-2 m-5 text-center text-text-primary-deep-green-900 bg-white rounded-lg border hover:bg-gray-100">
+                      Add Promo
+                    </button>
+                  </span>
+                </div>
               </div>
             </div>
           </div>
