@@ -29,6 +29,7 @@ const MobileNav = ({ expand, setExpand }) => {
       className="absolute top-0 z-10 mt-20 h-[calc(100vh-80px)] w-72 bg-gray-100 transition-all lg:hidden"
       style={{
         right: `${expand ? '0' : '-18rem'}`,
+        display: `${expand ? 'block' : 'none'}`,
       }}
     >
       <ul className="flex basis-16 flex-col items-center justify-center text-center text-2xl">

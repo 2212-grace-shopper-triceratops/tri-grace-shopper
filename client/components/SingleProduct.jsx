@@ -42,13 +42,13 @@ const singleProduct = () => {
 
   return (
     <>
-      <PromoBanner />
+      {/* <PromoBanner /> */}
       {!productLoading ? (
         <main className="font-serif flex md:h-[470px]">
           <section className="mt-8 flex flex-col justify-center md:flex-row md:gap-20">
             <div className="mx-auto md:mx-0">
               <img
-                className="h-96 md:h-full"
+                className="h-96 rounded-xl md:h-full"
                 src={`${singleProduct.imageURL}`}
                 alt="error showing photo"
               />
@@ -72,7 +72,7 @@ const singleProduct = () => {
                 ${singleProduct.price}
               </p>
               <p className="mb-8 leading-tight">
-                {singleProduct.shortDescription}
+                {singleProduct.shortDescription?.slice(0, 50)}
               </p>
               <div className="mb-3 border-b-4 pb-4">
                 <button
